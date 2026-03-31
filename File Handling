@@ -1,0 +1,49 @@
+
+#include <stdio.h>
+
+int main()
+{
+    
+    FILE *p=fopen("f.txt","r");
+    
+        
+        int n;
+        fscanf(p,"%d",&n);
+        //fputs("AP22110020144",p);
+        int arr[n];
+        printf("\n%d\n",n);
+       // for(int i=0;i<n;i++){
+       int i=0;
+        while(fscanf(p,"%d",&arr[i]) != EOF){
+            printf("%d ",arr[i]);
+            i++;
+        }
+        int max,m;
+        printf("\n");
+        for(int i=n-1;i>=0;i--){
+            max=arr[i],m=i;
+            for(int j=i-1;j>=0;j--){
+                if(arr[j]>max){
+                    max=arr[j];
+                    m=j;
+                }
+                
+            }
+            arr[m]=arr[i];
+            arr[i]=max;
+            
+        }
+        for(int i=0;i<n;i++){
+            printf("%d ",arr[i]);
+        }
+        
+        fclose(p);
+
+        fopen("f1.txt","w");
+        for(int i=0;i<n;i++){   
+            printf("%d ",arr[i]);
+        }
+            
+    
+    return 0;
+}
