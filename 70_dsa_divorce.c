@@ -4,17 +4,17 @@
 
 int main() {
     int n;
-    int count=0;
+    int count=0,largest;
     scanf("%d",&n);
     for(int i=1;i<n/2+1;i++){
         if(n%i==0){
             count++;
-            // printf("%d",i);
+            largest =i;
         }
 
     }
     
-    printf("%d",count);
+    printf("%d \n%d",count,largest);
 
     return 0;
 }
