@@ -1,45 +1,47 @@
-#include<stdio.h>
-int main(){
-    int n;
-    printf("enterthe size of arr\n");
-    scanf("%d",&n);
-    int arr[n];
-    for(int i=0;i<n;i++){
-        scanf("%d",&arr[i]);
-    }
-    int r,k;
-    printf("1 to left    2 to right\n");
-    scanf("%d",&r);
-    printf("enter  no of steps\n");
-    scanf("%d",&k);
-    int arr_k[k];
-    if(r==1){
-        for(int i=0;i<k;i++){
-            arr_k[i]=arr[i];
-        }
-        for(int i=0;i<n-k;i++){
-            arr[i]=arr[i+k];
-        }
-        for(int i=n-k;i<n;i++){
-            arr[i]=arr_k[i-(n-k)];
-        }
-    }
-     else if(r==2){
-        for(int i=0;i<k;i++){
-            arr_k[i]=arr[n-k+i];
-        }
+#include <stdio.h>
 
-        for(int i=n;i>=k;i--){
-            arr[i]=arr[i-k];
-        }
+int searchRotatedArray(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
 
-        for(int i=0;i<k;i++){
-            arr[i]=arr_k[i];
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        // Check if mid is the target
+        if (arr[mid] == target)
+            return mid;
+
+        // Left half is sorted
+        if (arr[low] <= arr[mid]) {
+            if (arr[low] <= target && target < arr[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        // Right half is sorted
+        else {
+            if (arr[mid] < target && target <= arr[high]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
     }
-    
-    
-    for(int i=0;i<n;i++){
-        printf("%d ",arr[i]);
-    }
+
+    return -1; // Element not found
+}
+
+int main() {
+    int arr[] = {4, 5, 6, 7, 0, 1, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 0;
+
+    int result = searchRotatedArray(arr, n, target);
+
+    if (result != -1)
+        printf("Element found at index: %d\n", result);
+    else
+        printf("Element not found\n");
+
+    return 0;
 }
