@@ -8,10 +8,10 @@ char* convert(char* s, int numRows) {
 
     for (int i = 0; i < numRows; i++) {
         for (int j = 0; j + i < len; j += cycleLen) {
-            // First character in the cycle for this row
+           
             result[k++] = s[j + i];
             
-            // Second character in the cycle (only for middle rows)
+
             if (i != 0 && i != numRows - 1 && j + cycleLen - i < len) {
                 result[k++] = s[j + cycleLen - i];
             }
